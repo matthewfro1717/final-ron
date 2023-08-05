@@ -17,7 +17,7 @@ import flixel.util.FlxStringUtil;
 
 class PauseSubState extends MusicBeatSubstate
 {
-	var optionArray = ["resume song", "restart song", "shut down", "log off"];
+	var optionArray = ["resume song", "restart song", "botplay", "shut down", "log off"];
 	var optionButtons = [];
 	var curSelected = 0;
 	var pauseMusic:FlxSound = new FlxSound();
@@ -78,6 +78,12 @@ class PauseSubState extends MusicBeatSubstate
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
+						case 'botplay':
+							PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+							PlayState.changedDifficulty = true;
+							PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+							PlayState.instance.botplayTxt.alpha = 1;
+							PlayState.instance.botplaySine = 0;
 						case "shut down": #if windows Sys.exit(0); #end
 					}
 				}
